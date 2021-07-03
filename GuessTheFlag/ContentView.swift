@@ -8,27 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isShowingAlert = false
+    let myAlert = Alert(title: Text("New level"), message: Text("You have just unlocked new levels"), dismissButton: .default(Text("Ok")))
     var body: some View {
-        VStack{
-            
-            Button("Tap me!") {
-                print("Button was tapped")
-            }
-            // Same thing
-            Button(action: {
-                print("Button was tapped")
-            }){
-                HStack(spacing: 10){
-                    // these two will use the pencil picture from the project directory
-//                    Image("pencil")
-//                    Image(decorative: "pencil")
-                    Image(systemName: "pencil").renderingMode(.original)
-                    Text("Tap me!")
-                }
-                
-            }
+        Button("Press to show alert"){
+            isShowingAlert = true
+            // "$" is used because SwiftUI will automatically set showingAlert back to false when the alert is dismissed.
+        }.alert(isPresented: $isShowingAlert){
+            Alert(title: Text("New level"), message: Text("New level is ready"), dismissButton: .default(Text("Ok")))
         }
-        
     }
 }
 
