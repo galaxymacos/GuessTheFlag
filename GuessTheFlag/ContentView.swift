@@ -9,32 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 20){
+        VStack{
+            // Make only the text go red
+//            ZStack{
+//                Text("My Content")
+//            }.background(Color.red)
             
-            HStack{
-                Text("1 2 3")
-            }
-            HStack{
-                Text("4 5 6")
-            }
-            HStack{
-                Text("7 8 9")
-            }
+//            ZStack{
+//                Text("My Content").background(Color.red)
+//            }
             
-            
-            // Stack things together
-            ZStack(alignment: .top){    // alignment is used when you have two different-size thing in stack
-                Text("hey")
-                Text("man")
+            // Make background go red
+            ZStack{
+                // Turn the whole screen to red
+//                Color.red
+                Color.red.frame(width: 200, height: 200)
+                // make the screen black or white
+//                Color.primary
+                // make the screen less black or less white
+                // make the color cover the safe area
+                Color.secondary.edgesIgnoringSafeArea(.all)
+                Text("My Content")
             }
-            // Push away items
-            Spacer()
         }
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()Spacer()
+        ContentView()
     }
 }
