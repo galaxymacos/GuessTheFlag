@@ -9,11 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-//        RadialGradient(colors: [.white, .black], center: .center, startRadius: 0, endRadius: 200)
+        VStack{
+            
+            Button("Tap me!") {
+                print("Button was tapped")
+            }
+            // Same thing
+            Button(action: {
+                print("Button was tapped")
+            }){
+                HStack(spacing: 10){
+                    // these two will use the pencil picture from the project directory
+//                    Image("pencil")
+//                    Image(decorative: "pencil")
+                    Image(systemName: "pencil").renderingMode(.original)
+                    Text("Tap me!")
+                }
+                
+            }
+        }
         
-//        LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom).ignoresSafeArea(edges: .all)
-        
-        AngularGradient(colors: [.red, .yellow, .green, .blue, .purple, .red], center: .center)
     }
 }
 
