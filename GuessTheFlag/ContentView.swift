@@ -16,17 +16,24 @@ struct ContentView: View {
       
         ZStack{
             // .edgeIgnoringSafeArea(.all) or ignoringSafeArea(edge: .all)
-            Color.blue.edgesIgnoringSafeArea(.all)
+//            Color.blue.edgesIgnoringSafeArea(.all)
+            LinearGradient(colors: [.blue, .black], startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all)
             VStack(spacing: 30){
                 VStack{
                     Text("Tag the flag of ").foregroundColor(.white)
-                    Text(countries[correctAnswerIndex]).foregroundColor(.white)
+                    Text(countries[correctAnswerIndex]).foregroundColor(.white).font(.largeTitle).fontWeight(.bold)
                 
                 }
                 
                 ForEach(0..<3){ number in
                     Button(action: {FlagTapped(number: number)}){
-                        Image(countries[number]).renderingMode(.original)
+                        Image(countries[number])
+                            .renderingMode(.original)
+                            // Cut the image to be a shape
+                            .clipShape(Capsule())
+                            // go D
+                            .overlay(Capsule().stroke(Color.black, lineWidth: 1))
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                     }
                 }
                 
