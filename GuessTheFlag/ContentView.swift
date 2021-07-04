@@ -8,15 +8,53 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isShowingAlert = false
-    let myAlert = Alert(title: Text("New level"), message: Text("You have just unlocked new levels"), dismissButton: .default(Text("Ok")))
+    @State var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"]
+    @State var correctAnswerIndex = Int.random(in: 0...2)
+    @State var scoreTitle = ""
+    @State var isShowingScore = false
     var body: some View {
-        Button("Press to show alert"){
-            isShowingAlert = true
-            // "$" is used because SwiftUI will automatically set showingAlert back to false when the alert is dismissed.
-        }.alert(isPresented: $isShowingAlert){
-            Alert(title: Text("New level"), message: Text("New level is ready"), dismissButton: .default(Text("Ok")))
+      
+        ZStack{
+            // .edgeIgnoringSafeArea(.all) or ignoringSafeArea(edge: .all)
+            Color.blue.edgesIgnoringSafeArea(.all)
+            VStack(spacing: 30){
+                VStack{
+                    Text("Tag the flag of ").foregroundColor(.white)
+                    Text(countries[correctAnswerIndex]).foregroundColor(.white)
+                
+                }
+                
+                ForEach(0..<3){ number in
+                    Button(action: {FlagTapped(number: number)}){
+                        Image(countries[number]).renderingMode(.original)
+                    }
+                }
+                
+                    
+            }
+//            
+            
+        }.alert(isPresented: $isShowingScore){
+            Alert(title: Text(scoreTitle), message: Text(""), dismissButton: .default(Text("Continue?")){
+                askQuestion()
+            })
         }
+        
+    }
+    
+    func FlagTapped(number: Int){
+        if number == correctAnswerIndex{
+            scoreTitle = "True"
+        }
+        else{
+            scoreTitle = "Wrong"
+        }
+        isShowingScore = true
+    }
+    
+    func askQuestion(){
+        countries.shuffle()
+        correctAnswerIndex = Int.random(in: 0...2)
     }
 }
 
